@@ -13,7 +13,7 @@ addons:
   sonarcloud:
     organization: "bennogreg"
     token:
-      secure: $SONAR_TOKEN
+      secure: ${SONAR_TOKEN}
 
 script:
   - sonar-scanner
