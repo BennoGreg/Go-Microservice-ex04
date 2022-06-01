@@ -13,7 +13,7 @@ addons:
   sonarcloud:
     organization: "bennogreg"
     token:
-      secure: ${SONAR_TOKEN}
+      secure: "nyAVFAAwtr+S9C0LEDChHpGAnMLoFn9NFeOUdJJbjtptwzZQyb2T3NEaEH/9UTGenzGu1wwmitix1SyNNi1xHlJfViFpp5VdLwi+J6SqBdDMpzcEtCtoUEnOqMI6Gd1hfqpMJB8VbB5/7d8+aHbTKV2y4T3IRG5IlDmv0wAPwGxsOxccGVtBi9hLsE1l8UkM7z/JjBbjvf1DMGPhhDWlzRl2iPbgfocCPdze7/TmaFt2H3OGo3m7Z+04mu0tdoGu67kyLCQR9hZUKoSOWtE5DUKEqAFigq/jLTwDEmTHsiJEIfVyqHUuBYlKfPl9UmcExGF1OlcZ53idQCnqRHBLeO7Uxby6gP8jDFJQQlMIGLAiztLlYeiUAcoc95JHdVWkqs1PzoahREhpdE39BNjUxpB6U199sJLSN+oc/U/np30nPLSO13k+tJrQV/QyEOP1pbNsV3h0z7mKT3/HAKvVqffFSaQAIqjFJ8DAqAk4jJKhuDBA+vOS0h2zEypQfJu8dPaOwkHbfvivWC72NZqG0mkDnv/gXbdrzvtpEktRcbyTiOWCaZEdSCxgHrz7upd9Y1z0tSZ+A3Co1xrOERqKp7gv72UYqt7hfWp0gpgJN5Tep8vOXpkcIWB8qxs/qo33okovLKu53XDG0Rs9Y8GjKBYg6wCI0SN7aJyLnE5LUXw="
 
 script:
   - sonar-scanner
