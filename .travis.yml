@@ -13,8 +13,8 @@ addons:
   sonarcloud:
     organization: "bennogreg"
     token:
-      secure: "cafe205e38ef51ae859c2d88b7dade407b30881d"
+      secure: $SONAR_TOKEN
 
 script:
-  - sonar-scanner -X
+  - sonar-scanner
   - go test -v
