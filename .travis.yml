@@ -9,5 +9,12 @@ services:
   - postgresql
   - docker
 
+addons:
+  sonarcloud:
+    organization: "bennogreg"
+    token:
+      secure: $SONAR_TOKEN
+
 script:
+  - sonar-scanner
   - go test -v
