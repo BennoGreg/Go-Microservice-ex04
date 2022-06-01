@@ -19,3 +19,5 @@ script:
   - sonar-scanner
   - go test -v
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+  - docker build -f Dockerfile -t bennol98/travis-docker:latest ./
+  - docker image push bennol98/travis-docker:latest
