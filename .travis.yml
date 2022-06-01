@@ -18,3 +18,4 @@ addons:
 script:
   - sonar-scanner
   - go test -v
+  - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
