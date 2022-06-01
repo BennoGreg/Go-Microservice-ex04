@@ -20,4 +20,6 @@ script:
   - go test -v
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
   - docker build -f Dockerfile -t bennol98/travis-docker:latest ./
-  - docker image push bennol98/travis-docker:latest
+  - GIT_SHA="$(git rev-parse --short HEAD)"
+  - docker tag bennol98/travis-docker:latest bennol98/travis-docker:$GIT_SHA
+  - docker image push bennol98/travis-docker:$GIT_SHA
