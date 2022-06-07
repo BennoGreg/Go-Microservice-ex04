@@ -15,11 +15,17 @@ addons:
     token:
       secure: "nyAVFAAwtr+S9C0LEDChHpGAnMLoFn9NFeOUdJJbjtptwzZQyb2T3NEaEH/9UTGenzGu1wwmitix1SyNNi1xHlJfViFpp5VdLwi+J6SqBdDMpzcEtCtoUEnOqMI6Gd1hfqpMJB8VbB5/7d8+aHbTKV2y4T3IRG5IlDmv0wAPwGxsOxccGVtBi9hLsE1l8UkM7z/JjBbjvf1DMGPhhDWlzRl2iPbgfocCPdze7/TmaFt2H3OGo3m7Z+04mu0tdoGu67kyLCQR9hZUKoSOWtE5DUKEqAFigq/jLTwDEmTHsiJEIfVyqHUuBYlKfPl9UmcExGF1OlcZ53idQCnqRHBLeO7Uxby6gP8jDFJQQlMIGLAiztLlYeiUAcoc95JHdVWkqs1PzoahREhpdE39BNjUxpB6U199sJLSN+oc/U/np30nPLSO13k+tJrQV/QyEOP1pbNsV3h0z7mKT3/HAKvVqffFSaQAIqjFJ8DAqAk4jJKhuDBA+vOS0h2zEypQfJu8dPaOwkHbfvivWC72NZqG0mkDnv/gXbdrzvtpEktRcbyTiOWCaZEdSCxgHrz7upd9Y1z0tSZ+A3Co1xrOERqKp7gv72UYqt7hfWp0gpgJN5Tep8vOXpkcIWB8qxs/qo33okovLKu53XDG0Rs9Y8GjKBYg6wCI0SN7aJyLnE5LUXw="
 
+before_install:
+  - export VERSION=$(curl --silent "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+  - wget https://github.com/aquasecurity/trivy/releases/download/v${VERSION}/trivy_${VERSION}_Linux-64bit.tar.gz
+  - tar zxvf trivy_${VERSION}_Linux-64bit.tar.gz
+
 script:
   - sonar-scanner
   - go test -v
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
   - docker build -f Dockerfile -t bennol98/travis-docker:latest ./
   - GIT_SHA="$(git rev-parse --short HEAD)"
+  - ./trivy image --exit-code 0 --severity HIGH --no-progress trivy-ci-test:$GIT_SHA
   - docker tag bennol98/travis-docker:latest bennol98/travis-docker:$GIT_SHA
   - docker image push bennol98/travis-docker:$GIT_SHA
