@@ -26,6 +26,6 @@ script:
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
   - docker build -f Dockerfile -t bennol98/travis-docker:latest ./
   - GIT_SHA="$(git rev-parse --short HEAD)"
-  - ./trivy image --exit-code 0 --severity HIGH --no-progress trivy-ci-test:$GIT_SHA
+  - ./trivy image --exit-code 0 --severity HIGH --no-progress bennol98/travis-docker:latest
   - docker tag bennol98/travis-docker:latest bennol98/travis-docker:$GIT_SHA
   - docker image push bennol98/travis-docker:$GIT_SHA
